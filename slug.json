@@ -1,0 +1,14 @@
+{
+  "dependencies": [
+    "spine",
+    "spine/lib/local",
+    "spine/lib/ajax",
+    "spine/lib/route",
+    "spine/lib/manager"
+  ],
+  "libs": [
+    "./vendor/jquery.js",
+    "./vendor/leaflet-src.js",
+    "./vendor/popcorn.min.js"
+  ]
+}

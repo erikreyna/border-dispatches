@@ -1,0 +1,9 @@
+{
+  "name": "Border-Dispatches",
+  "version": "0.0.1",
+  "dependencies": {
+    "serveup": "~0.0.5",
+    "hem": "~0.1.8",
+    "spine": "~1.1.0"
+  }
+}
