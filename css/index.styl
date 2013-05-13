@@ -22,7 +22,10 @@ body
     z-index 0
 
   nav
-    position fixed
+    @extend .ul
     top 0
-    width 100%
     z-index 1
+    
+    li
+      @extend .li
+      
