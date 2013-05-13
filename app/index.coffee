@@ -8,6 +8,7 @@ class App extends Spine.Controller
   
   elements:
     '.content'  : 'content'
+    'nav'       : 'nav'
   
   events:
     'click .loc-nav li' : 'goToLocation'
@@ -26,13 +27,15 @@ class App extends Spine.Controller
     # TODO: Create controller and view for location navigation
     @locNav = @el.find('.loc-nav')
     @locNav.html require('views/location-navigation')(Locations)
-  
-  goToLocation: (e) ->
+
+  goToLocation: (e) =>
     # Get index from data attribute
     index = e.target.dataset.index
     
     # Select from Locations array
     location = Locations[index]
+    
+    @nav.removeClass('hide')
     
     # Ease over to the new location
     easey().map(@map)
