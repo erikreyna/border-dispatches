@@ -8,7 +8,9 @@
   ],
   "libs": [
     "./vendor/jquery.js",
-    "./vendor/leaflet-src.js",
+    "./vendor/modestmaps.js",
+    "./vendor/easey.js",
+    "./vendor/easey.handlers.js",
     "./vendor/popcorn.min.js"
   ]
 }
