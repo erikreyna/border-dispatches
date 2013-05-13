@@ -8,6 +8,7 @@ class App extends Spine.Controller
   
   elements:
     '.content'  : 'content'
+    'nav'       : 'nav'
   
   
   constructor: ->
@@ -22,6 +23,7 @@ class App extends Spine.Controller
     
     setTimeout ( =>
       @content.addClass('hide')
+      @nav.addClass('hide')
       @goToAliJegk()
     ), 2000
     
@@ -31,6 +33,7 @@ class App extends Spine.Controller
       .to(@map.locationCoordinate({ lat: 31.816022, lon: -112.554245 }))
       .zoom(11).optimal(0.9, 1.42, =>
         @content.removeClass('hide')
+        @nav.removeClass('hide')
         @goToNogales()
       )
       
