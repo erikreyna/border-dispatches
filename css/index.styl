@@ -1,6 +1,6 @@
 @import './mixin'
 @import './common'
-@import './video'
+// @import './columns'
 
 @import './loc_nav'
 
@@ -65,6 +65,49 @@ body
           padding-left 60px
         a
           text-decoration none
+    
+    .media
+      position relative
+      width 100%
+      height 94%
+      z-index 0
+      
+      .background
+        position absolute
+        top 0
+        left 0
+        width 100%
+        height 100%
+        background-color transparent
+        transition all 3000ms
+        
+        &.initial
+          background-color black
+      
+      .columns
+        position absolute
+        top 0
+        left 0
+        width 100%
+        height 100%
+        
+        .column
+          width 50%
+          display inline-block
+          margin-top 10%
+          transition margin-top 2500ms
+          
+          &.initial
+            width 100%
+            display block
+            margin-top 0
+            transition margin-top 2500ms
+            
+          video.primary
+            display block
+            margin 0 auto
+            height 100%
+            transition all 2500ms
 
 .clearfix 
   display inline-block

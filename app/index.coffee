@@ -12,8 +12,8 @@ class App extends Spine.Controller
   
   elements:
     '.content'    : 'content'
-    'nav'         : 'nav'
-    # '.name'       : 'name'
+    '.background' : 'background'
+    '.column'     : 'column'
     '.primary'    : 'primary'
     '.secondary'  : 'secondary'
   
@@ -32,8 +32,14 @@ class App extends Spine.Controller
     primaryVideo.code({
       start: 32,
       onStart: (e) =>
-        # Resize video
-        @primary.width(480)
+        
+        # Remove initial state of DOM elements
+        @background.removeClass('initial')
+        @column.removeClass('initial')
+        
+        # Resize height of video
+        @primary.height(320)
+        
         @goToLocation(0)
         
         # TODO: Add marker to map
@@ -67,7 +73,6 @@ class App extends Spine.Controller
     
     v   = v or 0.9
     rho = rho or 1.42
-    
     
     # Select from Locations array
     location = Locations[index]
