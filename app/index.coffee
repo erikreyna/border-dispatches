@@ -6,6 +6,10 @@ Locations = require('lib/locations')
 
 class App extends Spine.Controller
   
+  # Templates for tile layer (take your pick)
+  # template: 'http://tile.openstreetmap.org/{Z}/{X}/{Y}.png'
+  template: 'http://tile.stamen.com/terrain/{Z}/{X}/{Y}.png'
+  
   elements:
     '.content'    : 'content'
     'nav'         : 'nav'
@@ -54,10 +58,11 @@ class App extends Spine.Controller
     primaryVideo.play()
     
     
-    # Initialize map with Stamen layer
-    # TODO: Find better tile set
-    layer = new MM.StamenTileLayer("terrain")
-    @map = new MM.Map("map", layer)
+    # Initialize layer and map
+    layer = new MM.TemplatedLayer(@template)
+    
+    @map = new MM.Map("map")
+    @map.addLayer(layer)
     @map.setCenterZoom(new MM.Location(32.58, -117.07), 11)
     
     # TODO: Create controller and view for location navigation
