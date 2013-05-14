@@ -11,7 +11,6 @@
     "./vendor/modestmaps.js",
     "./vendor/easey.js",
     "./vendor/easey.handlers.js",
-    "./vendor/tile.stamen.js",
-    "./vendor/popcorn.min.js"
+    "./vendor/popcorn-complete.js"
   ]
 }
