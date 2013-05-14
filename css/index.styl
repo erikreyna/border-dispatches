@@ -18,8 +18,7 @@ a
 body
   margin 0
   padding 0
-  font .7em/1em 'Helvetica Neue', Helvetica, Arial, sans-serif
-  
+  font 1em/1em 'Helvetica Neue', Helvetica, Arial, sans-serif
   color black
   height 100%
   
@@ -45,11 +44,13 @@ body
       text-transform uppercase
       background-color white
       color black
-      padding 0 10%
+      padding 0 5%
       
       h1
-        padding-left 1%
+        padding 0 3%
         float left
+        font-size 1em
+        line-height 1.4em
         
         .smallText
           text-transform lowercase
@@ -59,16 +60,23 @@ body
       
       ul
         list-style none
-        line-height 1.5em
+        line-height 1em
       
       li
         display inline-block
         padding 0 1%
+        font-size .6em
+        border-left 1px solid black
         
         &:first-child
-          padding-left 5%
+          padding-left 2%
+          border-left 0px
+          
         a
           text-decoration none
+          
+          &:active
+            background-color green
 
 .clearfix 
   display inline-block
