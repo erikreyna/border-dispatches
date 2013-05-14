@@ -13,7 +13,7 @@ class App extends Spine.Controller
   elements:
     '.content'    : 'content'
     'nav'         : 'nav'
-    '.name'       : 'name'
+    # '.name'       : 'name'
     '.primary'    : 'primary'
     '.secondary'  : 'secondary'
   
@@ -27,7 +27,6 @@ class App extends Spine.Controller
     
     # Set up Popcorn instance
     primaryVideo    = Popcorn(".primary")
-    # secondaryVideo  = Popcorn(".secondary")
     
     # Set up Popcorn footnotes
     primaryVideo.code({
@@ -54,7 +53,6 @@ class App extends Spine.Controller
     
     primaryVideo.play()
     
-    
     # Initialize layer and map
     layer = new MM.TemplatedLayer(@template)
     
@@ -62,9 +60,6 @@ class App extends Spine.Controller
     @map.addLayer(layer)
     @map.setCenterZoom(new MM.Location(32.58, -117.07), 11)
     
-    # TODO: Create controller and view for location navigation
-    @locNav = @el.find('.loc-nav')
-    @locNav.html require('views/location-navigation')(Locations)
     
   goToLocation: (e, v, rho) =>
     # Get index from data attribute
@@ -77,10 +72,8 @@ class App extends Spine.Controller
     # Select from Locations array
     location = Locations[index]
     
-    @nav.removeClass('hide')
-    
-    # Update the location metadata
-    @name.text(location.name)
+    # # Update the location metadata
+    # @name.text(location.name)
     
     # Ease over to the new location
     easey().map(@map)
