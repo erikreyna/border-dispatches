@@ -19,6 +19,7 @@ class App extends Spine.Controller
   
   constructor: ->
     super
+    window.bd = @
     
     #
     # Present full screen trailer when page loads
@@ -73,6 +74,8 @@ class App extends Spine.Controller
     
     # Select from Locations array
     location = Locations[index]
+    
+    console.log "You're going to #{location.name}"
     
     # # Update the location metadata
     # @name.text(location.name)
