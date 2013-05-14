@@ -3,9 +3,22 @@
 
 @import './loc_nav'
 
+a
+  color black
+  -webkit-transition color .2s linear
+  -moz-transition color .2s linear
+  -o-transition color .2s linear
+  -ms-transition color .2s linear
+  transition color .2s linear
+  
+  &:hover
+    color red
+
 body
   margin 0
   padding 0
+  font 14px/16px 'Helvetica Neue', Helvetica, Arial, sans-serif
+  color black
   
   .content
     position relative
@@ -22,10 +35,45 @@ body
     z-index 0
 
   nav
-    @extend .ul
+    position relative
     top 0
     z-index 1
+    text-transform uppercase
+    width 100%
+    background-color white
+    padding-left 100px
+    color black
+    
+    h1
+      float left
+      
+      .smallText
+        text-transform lowercase
+      
+      a
+        text-decoration none
+    
+    ul
+      list-style none
     
     li
-      @extend .li
+      display inline-block
+      padding 4px 10px
       
+      &:first-child
+        padding-left 60px
+    
+    
+      
+      a
+        text-decoration none
+    
+.clearfix 
+  display inline-block
+  
+  &:after
+    content "." 
+    display block 
+    height 0 
+    clear both
+    visibility hidden
