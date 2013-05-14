@@ -13,10 +13,8 @@ class App extends Spine.Controller
   elements:
     '.content'    : 'content'
     '.background' : 'background'
-    '.columns'    : 'columns'
     '.column'     : 'column'
     '.primary'    : 'primary'
-    '.secondary'  : 'secondary'
   
   
   constructor: ->
@@ -36,14 +34,8 @@ class App extends Spine.Controller
         
         # Remove initial state of DOM elements
         @background.removeClass('initial')
-        @column.removeClass('initial')
-        
-        setTimeout ( =>
-          @columns.removeClass('initial')
-        ), 1000
-        
-        # Resize height of video
-        @primary.height(320)
+        @primary.addClass('small')
+        @column.addClass('half')
         
         @goToLocation(0)
         
