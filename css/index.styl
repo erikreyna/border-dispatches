@@ -44,7 +44,6 @@ body
       text-transform uppercase
       background-color white
       color black
-      padding 0 5%
       
       h1
         padding 0 3%
@@ -99,18 +98,20 @@ body
         left 0
         width 100%
         height 100%
+        padding-top 10%
+        transition all 2500ms
+        
+        &.initial
+          padding-top 0
         
         .column
           width 50%
           display inline-block
-          margin-top 10%
-          transition margin-top 2500ms
+          transition all 2500ms
           
           &.initial
             width 100%
             display block
-            margin-top 0
-            transition margin-top 2500ms
             
           video.primary
             display block
