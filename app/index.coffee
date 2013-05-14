@@ -18,10 +18,6 @@ class App extends Spine.Controller
     '.secondary'  : 'secondary'
   
   
-  events:
-    'click .loc-nav li' : 'goToLocation'
-  
-  
   constructor: ->
     super
     
@@ -31,28 +27,29 @@ class App extends Spine.Controller
     
     # Set up Popcorn instance
     primaryVideo    = Popcorn(".primary")
-    secondaryVideo  = Popcorn(".secondary")
+    # secondaryVideo  = Popcorn(".secondary")
     
     # Set up Popcorn footnotes
     primaryVideo.code({
-      start: 5,
+      start: 32,
       onStart: (e) =>
         # Resize video
         @primary.width(480)
-        @primary.height(320)
         @goToLocation(0)
+        
+        # TODO: Add marker to map
     })
     
     primaryVideo.code({
-      start: 10,
+      start: 65,
       onStart: (e) =>
-        @goToLocation(1)
+        @goToLocation(1, 0.1)
     })
     
     primaryVideo.code({
-      start: 15,
+      start: 114,
       onStart: (e) =>
-        @goToLocation(2)
+        @goToLocation(2, 0.3)
     })
     
     primaryVideo.play()
@@ -68,10 +65,14 @@ class App extends Spine.Controller
     # TODO: Create controller and view for location navigation
     @locNav = @el.find('.loc-nav')
     @locNav.html require('views/location-navigation')(Locations)
-
-  goToLocation: (e) =>
+    
+  goToLocation: (e, v, rho) =>
     # Get index from data attribute
     index = e.target?.dataset.index or e
+    
+    v   = v or 0.9
+    rho = rho or 1.42
+    
     
     # Select from Locations array
     location = Locations[index]
@@ -84,7 +85,7 @@ class App extends Spine.Controller
     # Ease over to the new location
     easey().map(@map)
       .to(@map.locationCoordinate(location.coords))
-      .zoom(11).optimal(0.9, 1.42)
+      .zoom(11).optimal(v, rho)
 
 
 module.exports = App
