@@ -1,2 +1,5 @@
 node_modules/
 .DS_Store
+*.ogv
+*.mp4
+*.mov
