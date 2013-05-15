@@ -10,7 +10,8 @@ class App extends Spine.Controller
   # template: 'http://tile.openstreetmap.org/{Z}/{X}/{Y}.png'
   template: 'http://tile.stamen.com/terrain/{Z}/{X}/{Y}.png'
   
-  
+  events:
+    'click li a'  : 'goToLocation'
   elements:
     '.target-area'  : 'targetArea'
   
