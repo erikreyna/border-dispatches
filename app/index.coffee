@@ -76,42 +76,43 @@ class App extends Spine.Controller
       l1 = @map.pointLocation(p1)
       l2 = @map.pointLocation(p2)
       
-      
       # Cache boundaries
       minLat = l1.lat
       maxLat = l2.lat
       minLon = l1.lon
       maxLon = l2.lon
       
-      
-      
       # Check if content in region
       for location in Locations
         coords = location.coords
         
-        # Get coordinates of location
-
-        # Tecate Coordinates
+        loc = new MM.Location(coords.lat, coords.lon)
+        if @map.extent().containsLocation(loc)
+          console.log location.name
         
-        # lat:32.5811734
-        # lon: -116.6209871
-        
-        lat = coords.lat
-        lon = coords.lon
-        # console.log 'lon', minLon, maxLon
-        # console.log 'lat', minLat, maxLat
-        
-        if lat < minLat
-          continue
-        if lat > maxLat
-          continue
-        if lon < minLon
-          continue
-        if lon > maxLon
-          continue
-        
-        console.log location
-        break
+        # # Get coordinates of location
+        # 
+        # # Tecate Coordinates
+        # 
+        # # lat:32.5811734
+        # # lon: -116.6209871
+        # 
+        # lat = coords.lat
+        # lon = coords.lon
+        # # console.log 'lon', minLon, maxLon
+        # # console.log 'lat', minLat, maxLat
+        # 
+        # if lat < minLat
+        #   continue
+        # if lat > maxLat
+        #   continue
+        # if lon < minLon
+        #   continue
+        # if lon > maxLon
+        #   continue
+        # 
+        # console.log location
+        # break
     )
     
   goToLocation: (e, v, rho) =>
