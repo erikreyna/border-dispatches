@@ -1,4 +1,12 @@
 
+decompress:
+	unzip srtm_13_06.zip -d srtm_13_06
+	unzip srtm_14_06.zip -d srtm_14_06
+	unzip srtm_14_07.zip -d srtm_14_07
+	unzip srtm_15_06.zip -d srtm_15_06
+	unzip srtm_16_06.zip -d srtm_16_06
+	unzip srtm_16_07.zip -d srtm_16_07
+
 warp:
 	gdalwarp -s_srs EPSG:4326 -t_srs EPSG:3785 -r bilinear srtm_13_06/srtm_13_06.tif srtm_13_06/srtm_13_06-3785.tif
 	gdalwarp -s_srs EPSG:4326 -t_srs EPSG:3785 -r bilinear srtm_14_06/srtm_14_06.tif srtm_14_06/srtm_14_06-3785.tif
