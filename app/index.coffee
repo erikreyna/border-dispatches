@@ -10,6 +10,8 @@ class App extends Spine.Controller
   # template: 'http://tile.openstreetmap.org/{Z}/{X}/{Y}.png'
   template: 'http://tile.stamen.com/terrain/{Z}/{X}/{Y}.png'
   
+  formats: ['m4v', 'webm']
+  
   events:
     'click li a'  : 'goToLocation'
   elements:
@@ -58,6 +60,17 @@ class App extends Spine.Controller
     # Initialize layer and map
     layer = new MM.TemplatedLayer(@template)
     
+    # Set up map for pre-caching
+    @preloadMap = new MM.Map("map")
+    @preloadMap.addLayer(layer)
+    @preloadMap.setCenterZoom(new MM.Location(32.58, -117.07), 11)
+    
+    # Send preload map to frequent locations
+    @goToLocation(0, null, null, @preloadMap)
+    @goToLocation(1, null, null, @preloadMap)
+    @goToLocation(2, null, null, @preloadMap)
+    
+    # Set up visible map
     @map = new MM.Map("map", [], null, [new MM.TouchHandler(), new MM.DragHandler()])
     @map.addLayer(layer)
     @map.setCenterZoom(new MM.Location(32.58, -117.07), 11)
@@ -116,25 +129,34 @@ class App extends Spine.Controller
         # break
     )
     
-  goToLocation: (e, v, rho) =>
+  goToLocation: (e, v, rho, map) =>
     # Get index from data attribute
     index = e.target?.dataset.index or e
     
     v   = v or 0.9
     rho = rho or 1.42
+    map = map or @map
     
     # Select from Locations array
     location = Locations[index]
     
     console.log "You're going to #{location.name}"
+    console.log "Source for videos at", @getSource(location.name)
     
     # # Update the location metadata
     # @name.text(location.name)
     
     # Ease over to the new location
-    easey().map(@map)
-      .to(@map.locationCoordinate(location.coords))
+    easey().map(map)
+      .to(map.locationCoordinate(location.coords))
       .zoom(11).optimal(v, rho)
+  
+  getSource: (name) ->
+    name = name.replace(' ', '-').toLowerCase()
+    sources = []
+    for format in @formats
+      sources.push "#{name}.#{format}"
+    return sources
 
 
 module.exports = App
