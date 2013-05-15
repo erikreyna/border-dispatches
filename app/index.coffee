@@ -16,6 +16,9 @@ class App extends Spine.Controller
     'click li a'  : 'goToLocation'
   elements:
     '.target-area'  : 'targetArea'
+    '.mainVid' : 'mainVid'
+  
+  sourceTemplate: require 'views/primary_video'
   
   constructor: ->
     super
@@ -25,8 +28,8 @@ class App extends Spine.Controller
     # Present full screen trailer when page loads
     #
     
-    # # Set up Popcorn instance
-    # primaryVideo    = Popcorn(".primary")
+    # Set up Popcorn instance
+    @primaryVideo = Popcorn(".mainVid")
     # 
     # # Set up Popcorn footnotes
     # primaryVideo.code({
@@ -65,10 +68,10 @@ class App extends Spine.Controller
     @preloadMap.addLayer(layer)
     @preloadMap.setCenterZoom(new MM.Location(32.58, -117.07), 11)
     
-    # Send preload map to frequent locations
-    @goToLocation(0, null, null, @preloadMap)
-    @goToLocation(1, null, null, @preloadMap)
-    @goToLocation(2, null, null, @preloadMap)
+    # # Send preload map to frequent locations
+    # @goToLocation(0, null, null, @preloadMap)
+    # @goToLocation(1, null, null, @preloadMap)
+    # @goToLocation(2, null, null, @preloadMap)
     
     # Set up visible map
     @map = new MM.Map("map", [], null, [new MM.TouchHandler(), new MM.DragHandler()])
@@ -146,10 +149,14 @@ class App extends Spine.Controller
     # # Update the location metadata
     # @name.text(location.name)
     
+    @primaryVideo.pause()
+    
     # Ease over to the new location
     easey().map(map)
       .to(map.locationCoordinate(location.coords))
-      .zoom(11).optimal(v, rho)
+      .zoom(11).optimal(v, rho, =>
+        @swapVideo(location)
+      )
   
   getSource: (name) ->
     name = name.replace(' ', '-').toLowerCase()
@@ -157,6 +164,13 @@ class App extends Spine.Controller
     for format in @formats
       sources.push "#{name}.#{format}"
     return sources
-
+  
+  swapVideo: (location) =>
+    console.log @getSource(location.name)
+    @mainVid.empty()
+    @mainVid.html @sourceTemplate(@getSource(location.name))
+    setTimeout ( =>
+      @primaryVideo.play()
+    ), 400 
 
 module.exports = App

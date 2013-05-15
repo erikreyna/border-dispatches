@@ -1,0 +1,6 @@
+<% console.log 'HERE' %>
+<video class="sizeVid" controls autoplay>
+<% for source in @: %>
+  <source src="video/<%- source %>" />
+<% end %>
+</video>
