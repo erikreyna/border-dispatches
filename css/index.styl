@@ -60,43 +60,6 @@ body
         
       a
         text-decoration none
-    
-    .media
-      position relative
-      width 100%
-      height 94%
-      
-      .background
-        position absolute
-        top 0
-        left 0
-        z-index 0
-        width 100%
-        height 100%
-        background-color transparent
-        transition all 3000ms
-        
-        &.initial
-          background-color black
-          
-      .column
-        position absolute
-        z-index 1
-        width 100%
-        transition all 2500ms
-        
-        &.half
-          width 50%
-          padding-top 10%
-        
-        video.primary
-          display block
-          margin 0 auto
-          height 100%
-          transition all 2500ms
-          
-          &.small
-            height 320px
 
 .clearfix 
   display inline-block
@@ -109,6 +72,24 @@ body
     visibility hidden
 
 
+.content
+  position absolute
+  width 100%
+  top 30%
+  padding 0 2%
+  
+
+.primary-video
+  position absolute
+  left 0
+  width 420px
+  height 236px
+  z-index 1
+  margin-left 4%
+
+  &.deboss
+    outer-deboss(5px)
+  
 .target-area
   position absolute
   width 24%
@@ -117,13 +98,20 @@ body
   left 65%
   top 30%
 
-.sizeVid
-  position absolute
-  top 80px
-  left 30px
-  z-index 3
-  width 420px
-  height 236px
+video
+  transition opacity 1000ms linear
+  display none
+  opacity 0
+  
+  &.display
+    display block
+  
+  &.show
+    opacity 1
+  
+  &.small
+    z-index 2
+    width 420px
 
 .social
   position absolute
@@ -141,13 +129,10 @@ body
       img
       width 20px
 
-#map, #map-preload
+#map
   position absolute
   top 0
   left 0
   right 0
   bottom 0
   z-index 0
-
-#map-preload
-  display none

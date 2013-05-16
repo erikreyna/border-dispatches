@@ -1,12 +1,18 @@
-.ul
-  width 100%
-  margin 0
-  padding 0
-  list-style none
-  background-color #f2f2f2
-  border-bottom 1px solid #ccc
-  border-top 1px solid #ccc
+$black = #000
+$white = #FFF
 
-.li
-  display inline-block
-  list-style-type none
+outer-deboss($distance) {
+  &:before {
+    background: rgba($black, 0.25);
+    border-radius: $distance;
+    box-shadow: 0 1px 2px rgba($black, 0.5) inset, 0 -1px 0px rgba($white, 0.25) inset;
+    content: "";
+    height: 100%;
+    left: 0 - $distance;
+    padding: $distance $distance ($distance + 1);
+    position: absolute;
+    top: 0 - $distance;
+    width: 100%;
+    z-index: -1;
+  }
+}

@@ -1,3 +1,4 @@
+
 <html>
 <head>
   <meta charset='utf-8'>
@@ -9,19 +10,37 @@
 </head>
 <body>
   <div id='map'></div>
-  <div id='map-preload'></div>
   
   <nav class="clearfix">
-    <h1><a href="#">Border Dispatches<span class="smallText"> an interactive documentary</span></a></h1>
+    <h1><a href="#">Border Dispatches<span class="smallText"> stories from the US-Mexico border</span></a></h1>
     <ul>
-      <li><a href="#/video/ali-jegk" data-index='0'>The Abandoning</a></li>
-      <li><a href="#/video/nogales" data-index='1'>The Abandoning</a></li>
-      <li><a href="#/video/sierra-vista" data-index='2'>The Abandoning</a></li>
+      <li><a href="#/video/ali-jegk">The Reservation</a></li>
+      <li><a href="#/video/nogales">The Kitchen</a></li>
+      <li><a href="#/video/sierra-vista">The Veteren</a></li>
     </ul>
   </nav>
   
-  <div class='target-area'></div>
-  <div class="primary-video"></div>
+  <div class='content'>
+    <div class="primary-video">
+      
+      <video data-name='ali-jegk' class="small" controls preload='auto'>
+        <source src="video/ali-jegk.m4v" />
+        <source src="video/ali-jegk.webm" />
+      </video>
+      
+      <video data-name='nogales' class="small" controls preload='auto'>
+        <source src="video/nogales.m4v" />
+        <source src="video/nogales.webm" />
+      </video>
+      
+      <video data-name='sierra-vista' class="small" controls preload='auto'>
+        <source src="video/sierra-vista.m4v" />
+        <source src="video/sierra-vista.webm" />
+      </video>
+      
+    </div>
+    <div class='target-area'></div>
+  </div>
   
   <div class="social">
     <ul>

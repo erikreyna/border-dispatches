@@ -39,7 +39,7 @@ class Home extends Controller
     #
     
     # Set up Popcorn instance
-    @primaryVideo = Popcorn(".primary-video")
+    # @primaryVideo = Popcorn(".primary-video")
     # 
     # # Set up Popcorn footnotes
     # primaryVideo.code({
@@ -72,16 +72,6 @@ class Home extends Controller
     
     # Initialize layer and map
     layer = new MM.TemplatedLayer(@template)
-    
-    # Set up map for pre-caching
-    @preloadMap = new MM.Map("map")
-    @preloadMap.addLayer(layer)
-    @preloadMap.setCenterZoom(new MM.Location(32.58, -117.07), 11)
-    
-    # # Send preload map to frequent locations
-    # @goToLocation(0, null, null, @preloadMap)
-    # @goToLocation(1, null, null, @preloadMap)
-    # @goToLocation(2, null, null, @preloadMap)
     
     # Set up visible map
     @map = new MM.Map("map", [], null, [new MM.TouchHandler(), new MM.DragHandler()])
@@ -145,27 +135,38 @@ class Home extends Controller
     
   goToLocation: (index, v, rho, map) =>
     
+    # Select from Locations array
+    location = Locations[index]
+    
+    # Check if current video
+    name = location.name
+    
     v   = v or 0.9
     rho = rho or 1.42
     map = map or @map
     
-    # Select from Locations array
-    location = Locations[index]
-    
     console.log "You're going to #{location.name}"
-    console.log "Source for videos at", @getSource(location.name)
     
-    @primaryVideo.pause()
+    # Pause and fade video
+    if @currentLocation
+      previous = $("video[data-name='#{@dasherize(@currentLocation)}']")
+      previous[0].pause()
+      previous.removeClass('show')
     
     # Ease over to the new location
     easey().map(map)
       .to(map.locationCoordinate(location.coords))
       .zoom(11).optimal(v, rho, =>
+        
+        # Hide previous video
+        previous?.removeClass('display')
+        
         @swapVideo(location)
       )
   
   getSource: (name) ->
-    name = name.replace(' ', '-').toLowerCase()
+    name = @dasherize(name)
+    
     sources = []
     for format in @formats
       sources.push "#{name}.#{format}"
@@ -173,15 +174,23 @@ class Home extends Controller
   
   swapVideo: (location) =>
     return unless location.video
-    
     name = location.name
     return if name is @currentLocation
     
+    # Set new current location
     @currentLocation = name
-    @primaryVideoEl.empty()
-    @primaryVideoEl.html @sourceTemplate( @getSource(name) )
-    setTimeout ( =>
-      @primaryVideo.play()
-    ), 400 
+    
+    # Fade in and play current video
+    current = $("video[data-name='#{@dasherize(@currentLocation)}']")
+    console.log current
+    current.addClass('display')
+    setTimeout ( ->
+      current.addClass('show')
+      current[0].play()
+    ), 0
+    
+  
+  dasherize: (name) ->
+    return name.replace(' ', '-').toLowerCase()
 
 module.exports = Home
