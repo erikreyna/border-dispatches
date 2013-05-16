@@ -18,6 +18,7 @@ class Home extends Controller
     '.target-area'    : 'targetArea'
     '.primary-video'  : 'primaryVideoEl'
     'video'           : 'videos'
+    '.photos'         : 'photos'
     '.description'    : 'description'
   
   
@@ -190,6 +191,7 @@ class Home extends Controller
     
     # Add description
     @description.html(location.description)
+    @photos.html require('views/photos')({name: @dasherize(name)})
     
     # Fade in and play current video
     current = $("video[data-name='#{@dasherize(@currentLocation)}']")
