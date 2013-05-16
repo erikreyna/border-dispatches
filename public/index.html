@@ -6,14 +6,6 @@
   <link rel="stylesheet" href="application.css" type="text/css" charset="utf-8">
   <script src="application.js" type="text/javascript" charset="utf-8"></script>
   
-  <script type="text/javascript" charset="utf-8">
-    var exports = this;
-    jQuery(function(){
-      var App = require("index");
-      exports.app = new App({el: $("body")});
-    });
-  </script>
-  
 </head>
 <body>
   <div id='map'></div>
@@ -22,14 +14,14 @@
   <nav class="clearfix">
     <h1><a href="#">Border Dispatches<span class="smallText"> an interactive documentary</span></a></h1>
     <ul>
-      <li><a href="#" data-index='0'>The Abandoning</a></li>
-      <li><a href="#" data-index='1'>The Abandoning</a></li>
-      <li><a href="#" data-index='2'>The Abandoning</a></li>
+      <li><a href="#/video/ali-jegk" data-index='0'>The Abandoning</a></li>
+      <li><a href="#/video/nogales" data-index='1'>The Abandoning</a></li>
+      <li><a href="#/video/sierra-vista" data-index='2'>The Abandoning</a></li>
     </ul>
   </nav>
   
   <div class='target-area'></div>
-  <div class="mainVid"></div>
+  <div class="primary-video"></div>
   
   <div class="social">
     <ul>
@@ -38,6 +30,11 @@
        <li><a href="#"><img width="20px" src="img/twitter.png" alt="Border Dispatches Instagram Account - Follow Us"></a></li>
     </ul>
   </div>
+  
+  <script type="text/javascript">
+    window.app = require('index');
+  </script>
+  
 </body>
 
 </html>

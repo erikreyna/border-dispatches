@@ -32,7 +32,7 @@ hillshade:
 	gdaldem hillshade -compute_edges -z 10 srtm_13_07/srtm_13_07-3785.tif srtm_13_07/srtm_13_07-3785.tif
 	gdaldem hillshade -compute_edges -z 10 srtm_14_06/srtm_14_06-3785.tif srtm_14_06/srtm_14_06-3785.tif
 	gdaldem hillshade -compute_edges -z 10 srtm_14_07/srtm_14_07-3785.tif srtm_14_07/srtm_14_07-3785.tif
-	gdaldem hillshade -compute_edges -z 10 srtm_15_06/srtm_15_06-3785.tif srtm_15_06/srtm_15_06-3785.tif
+	gdaldem hillshade -compute_edges -z 2 srtm_15_06/srtm_15_06-3785.tif srtm_15_06/srtm_15_06-3785.tif
 	gdaldem hillshade -compute_edges -z 10 srtm_15_07/srtm_15_07-3785.tif srtm_15_07/srtm_15_07-3785.tif
 	gdaldem hillshade -compute_edges -z 10 srtm_16_06/srtm_16_06-3785.tif srtm_16_06/srtm_16_06-3785.tif
 	gdaldem hillshade -compute_edges -z 10 srtm_16_07/srtm_16_07-3785.tif srtm_16_07/srtm_16_07-3785.tif
