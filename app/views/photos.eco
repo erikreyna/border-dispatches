@@ -1,0 +1,4 @@
+<img src='img/<%- @name %>/0.jpg'>
+<img src='img/<%- @name %>/1.jpg'>
+<img src='img/<%- @name %>/2.jpg'>
+<img src='img/<%- @name %>/3.jpg'>

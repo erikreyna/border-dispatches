@@ -18,6 +18,9 @@ class Home extends Controller
     '.target-area'    : 'targetArea'
     '.primary-video'  : 'primaryVideoEl'
     'video'           : 'videos'
+    '.photos'         : 'photos'
+    '.description'    : 'description'
+  
   
   sourceTemplate: require 'views/primary_video'
   
@@ -76,7 +79,6 @@ class Home extends Controller
     layer = new MM.TemplatedLayer(@template)
     
     # Set up visible map
-    # [ new easey.DragHandler(), new easey.DoubleClickHandler(), new easey.MouseWheelHandler() ]
     @map = new MM.Map("map", [], null, [new MM.TouchHandler(), new MM.DragHandler(), new MM.DoubleClickHandler()])
     @map.addLayer(layer)
     @map.setCenterZoom(new MM.Location(31.58, -108.07), 6)
@@ -186,6 +188,10 @@ class Home extends Controller
     
     # Set new current location
     @currentLocation = name
+    
+    # Add description
+    @description.html(location.description)
+    @photos.html require('views/photos')({name: @dasherize(name)})
     
     # Fade in and play current video
     current = $("video[data-name='#{@dasherize(@currentLocation)}']")
