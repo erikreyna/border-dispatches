@@ -106,6 +106,7 @@ class App extends Spine.Controller
         loc = new MM.Location(coords.lat, coords.lon)
         if @map.extent().containsLocation(loc)
           console.log location.name
+          @swapVideo(location)
         
         # # Get coordinates of location
         # 
@@ -166,6 +167,10 @@ class App extends Spine.Controller
     return sources
   
   swapVideo: (location) =>
+    return unless location.video
+    if location.name is @currentLocation
+      return
+    @currentLocation = location.name
     console.log @getSource(location.name)
     @mainVid.empty()
     @mainVid.html @sourceTemplate(@getSource(location.name))

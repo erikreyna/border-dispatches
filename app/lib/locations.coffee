@@ -5,16 +5,19 @@ module.exports =
     coords:
       lat: 31.816022
       lon: -112.554245
+    video: true
   ,
     name: 'Nogales'
     coords:
       lat: 31.329812
       lon: -110.964274
+    video: true
   ,
     name: 'Sierra Vista'
     coords:
       lat: 31.335091
       lon: -110.181112
+    video: true
   ,
     name: 'San Ysidro San Diego California'
     coords:
