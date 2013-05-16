@@ -10,12 +10,14 @@ class Home extends Controller
   # Templates for tile layer (take your pick)
   # template: 'http://tile.openstreetmap.org/{Z}/{X}/{Y}.png'
   template: 'http://tile.stamen.com/terrain/{Z}/{X}/{Y}.png'
+  # template: 'http://tile.stamen.com/watercolor/{Z}/{X}/{Y}.png'
   
   formats: ['m4v', 'webm']
   
   elements:
     '.target-area'    : 'targetArea'
     '.primary-video'  : 'primaryVideoEl'
+    'video'           : 'videos'
   
   sourceTemplate: require 'views/primary_video'
   
@@ -74,11 +76,14 @@ class Home extends Controller
     layer = new MM.TemplatedLayer(@template)
     
     # Set up visible map
-    @map = new MM.Map("map", [], null, [new MM.TouchHandler(), new MM.DragHandler()])
+    # [ new easey.DragHandler(), new easey.DoubleClickHandler(), new easey.MouseWheelHandler() ]
+    @map = new MM.Map("map", [], null, [new MM.TouchHandler(), new MM.DragHandler(), new MM.DoubleClickHandler()])
     @map.addLayer(layer)
-    @map.setCenterZoom(new MM.Location(32.58, -117.07), 11)
+    @map.setCenterZoom(new MM.Location(31.58, -108.07), 6)
     
     @map.addCallback('panned', (e) =>
+      return unless @map.getZoom() > 10
+      
       position = @targetArea.position()
       
       top = position.top
@@ -107,6 +112,8 @@ class Home extends Controller
         if @map.extent().containsLocation(loc)
           console.log location.name
           @swapVideo(location)
+          console.log 'swappedvideo'
+          break
         
         # # Get coordinates of location
         # 
@@ -159,7 +166,7 @@ class Home extends Controller
       .zoom(11).optimal(v, rho, =>
         
         # Hide previous video
-        previous?.removeClass('display')
+        @videos.removeClass('display')
         
         @swapVideo(location)
       )
@@ -188,7 +195,6 @@ class Home extends Controller
       current.addClass('show')
       current[0].play()
     ), 0
-    
   
   dasherize: (name) ->
     return name.replace(' ', '-').toLowerCase()
