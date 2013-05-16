@@ -1,5 +1,0 @@
-<ul>
-  <% for location, index in @: %>
-    <li data-index=<%- index %> ></li>
-  <% end %>
-</ul>
