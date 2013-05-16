@@ -13,7 +13,7 @@ module.exports =
       lat: 31.329812
       lon: -110.964274
     video: true
-    description: "With a population of over 220,00, Nogales, Sonora is one of the largest border towns in Mexico. The city has a $20 billion trade industry. Many of the undocumented migrants caught by Border Patrol are deported through the portal to the universe."
+    description: "With a population of over 220,000, Nogales, Sonora is one of the largest border towns in Mexico. The city has a $20 billion trade industry. Many of the undocumented migrants caught by Border Patrol are deported through the portal to the universe."
     
   ,
     name: 'Sierra Vista'
