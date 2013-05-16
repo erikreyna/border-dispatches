@@ -76,7 +76,6 @@ class Home extends Controller
     layer = new MM.TemplatedLayer(@template)
     
     # Set up visible map
-    # [ new easey.DragHandler(), new easey.DoubleClickHandler(), new easey.MouseWheelHandler() ]
     @map = new MM.Map("map", [], null, [new MM.TouchHandler(), new MM.DragHandler(), new MM.DoubleClickHandler()])
     @map.addLayer(layer)
     @map.setCenterZoom(new MM.Location(31.58, -108.07), 6)
