@@ -12,10 +12,13 @@ a
   &:hover
     color red
 
+p
+  color black
+
 body
   margin 0
   padding 0
-  font 1em/1em 'Helvetica Neue', Helvetica, Arial, sans-serif
+  font 100% 'Helvetica Neue', Helvetica, Arial, sans-serif
   color black
   height 100%
 
@@ -30,6 +33,7 @@ body
     text-transform uppercase
     background-color white
     color black
+    z-index 2
     
     h1
       padding 0 30px
@@ -71,32 +75,10 @@ body
     clear both
     visibility hidden
 
-
-.content
-  position absolute
-  width 100%
-  top 30%
-  padding 0 2%
-  
-
 .primary-video
-  position absolute
-  left 0
-  width 420px
-  height 236px
-  z-index 1
-  margin-left 4%
 
   &.deboss
     outer-deboss(5px)
-  
-.target-area
-  position absolute
-  width 24%
-  height 40%
-  border 1px solid red
-  left 65%
-  top 30%
 
 video
   transition opacity 1000ms linear
@@ -111,7 +93,7 @@ video
   
   &.small
     z-index 2
-    width 420px
+    width 92%
 
 .social
   position absolute
@@ -136,3 +118,73 @@ video
   right 0
   bottom 0
   z-index 0
+  
+.flexbox
+  position relative
+  z-index 1
+  
+  display -webkit-box
+  -webkit-box-orient horizontal
+  -webkit-box-pack start
+  -webkit-box-align start
+  
+  display -moz-box
+  -moz-box-orient horizontal
+  -moz-box-pack start
+  -moz-box-align start
+  
+  display box
+  box-orient horizontal
+  box-pack start
+  box-align start
+  overflow hidden
+  
+  .col1
+    width 44%
+    height 50%
+    padding 30px 3% 0
+    margin-bottom -99999px
+    padding-bottom 99999px
+    
+    p
+      margin-bottom 30px
+      
+    &:nth-child(1)
+      -moz-box-ordinal-group 1
+      -webkit-box-ordinal-group 1
+      box-ordinal-group 1
+    
+    &:nth-child(2)
+      -moz-box-ordinal-group 2
+      -webkit-box-ordinal-group 2
+      box-ordinal-group 2
+    
+    &:nth-child(3)
+      -moz-box-ordinal-group 3
+      -webkit-box-ordinal-group 3
+      box-ordinal-group 3
+    
+  .col2
+    width 44%
+    height 50%
+    padding 30px 3% 0
+    margin-bottom -99999px
+    padding-bottom 99999px
+
+    p
+      margin-bottom 30px
+
+    &:nth-child(1)
+      -moz-box-ordinal-group 1
+      -webkit-box-ordinal-group 1
+      box-ordinal-group 1
+
+    &:nth-child(2)
+      -moz-box-ordinal-group 2
+      -webkit-box-ordinal-group 2
+      box-ordinal-group 2
+
+    &:nth-child(3)
+      -moz-box-ordinal-group 3
+      -webkit-box-ordinal-group 3
+      box-ordinal-group 3
