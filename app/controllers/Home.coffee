@@ -76,6 +76,10 @@ class Home extends Controller
     # 
     # primaryVideo.play()
     
+    # hide splash page on click
+    $("#splash").click ->
+      $(this).addClass('hide')
+    
     # Initialize layer and map
     layer = new MM.TemplatedLayer(@template)
     
@@ -127,8 +131,10 @@ class Home extends Controller
         coordinate = new MM.Location(coords.lat, coords.lon)
         
         if extent.containsLocation(coordinate)
+          # $('.flexbox').show()
           @swapVideo(location)
-          break
+        # else
+        #   $('.flexbox').hide()
     )
   
   plotContent: ->
