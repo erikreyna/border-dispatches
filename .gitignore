@@ -2,6 +2,7 @@ node_modules/
 .DS_Store
 public/application.js
 public/application.css
+public/tiles/
 *.ogv
 *.mp4
 *.mov
