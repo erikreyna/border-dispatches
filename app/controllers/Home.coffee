@@ -200,8 +200,8 @@ class Home extends Controller
   fade: (el) ->
     el.addClass('hide')
     # setTimeout ( ->
-    #   el.addClass('hide')
-    # ), 1000
+    #       el.addClass('hide')
+    #     ), 1000
   
   hideVideos: ->
     @videos.addClass('hide')
