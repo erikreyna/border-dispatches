@@ -77,8 +77,10 @@ class Home extends Controller
     # primaryVideo.play()
     
     # hide splash page on click
-    $("#splash").click ->
-      $(this).addClass('hide')
+    $('#splash').click =>
+      @fade( $('#splash') )
+      @navigate '/video/ali-jegk'
+      $('.flexbox').removeClass('hide')
     
     # Initialize layer and map
     layer = new MM.TemplatedLayer(@template)
@@ -131,10 +133,13 @@ class Home extends Controller
         coordinate = new MM.Location(coords.lat, coords.lon)
         
         if extent.containsLocation(coordinate)
-          # $('.flexbox').show()
           @swapVideo(location)
-        # else
-        #   $('.flexbox').hide()
+          return
+      console.log 'nothing'
+      
+      @videos.addClass('hide')
+      @videos.removeClass('show')
+      @currentLocation = null
     )
   
   plotContent: ->
@@ -177,6 +182,7 @@ class Home extends Controller
       .zoom(11).optimal(v, rho, =>
         
         # Hide previous video
+        @videos.addClass('hide')
         @videos.removeClass('display')
         
         @swapVideo(location)
@@ -195,10 +201,12 @@ class Home extends Controller
     name = location.name
     return if name is @currentLocation
     
+    @videos.addClass('hide')
+    
     # Set new current location
     @currentLocation = name
     
-    # Add description
+    # Add description and photos
     @description.html(location.description)
     @photos.html require('views/photos')({name: @dasherize(name)})
     
@@ -212,5 +220,12 @@ class Home extends Controller
   
   dasherize: (name) ->
     return name.replace(' ', '-').toLowerCase()
+  
+  # TODO: Make this a fade out function
+  fade: (el) ->
+    el.addClass('hide')
+    # setTimeout ( ->
+    #   el.addClass('hide')
+    # ), 1000
 
 module.exports = Home
