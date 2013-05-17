@@ -84,7 +84,24 @@ class Home extends Controller
     @map.addLayer(layer)
     @map.setCenterZoom(new MM.Location(31.58, -108.07), 6)
     
+    @plotContent()
+    
+    @map.addCallback('drawn', (e) =>
+      
+      # Update marker positions
+      for location in Locations
+        if location.video
+          coords = location.coords
+          coordinate = new MM.Location(coords.lat, coords.lon)
+          point = @map.locationPoint(coordinate)
+          
+          marker = $(".marker[data-name='#{@dasherize(location.name)}']")
+          marker.css('top', point.y)
+          marker.css('left', point.x)
+    )
+    
     @map.addCallback('panned', (e) =>
+      
       return unless @map.getZoom() > 10
       
       # Get position of navigate div
@@ -96,25 +113,33 @@ class Home extends Controller
       height = @navigateEl.height()
       
       # Create new points
-      p1 = new MM.Point(top, left)
-      p2 = new MM.Point(top + height, left + width)
+      p1 = new MM.Point(left, top)
+      p2 = new MM.Point(left + width, top + height)
       
       l1 = @map.pointLocation(p1)
       l2 = @map.pointLocation(p2)
       
-      # Create an extent
       extent = new MM.Extent(l1, l2)
       
       # Check for content in region
       for location in Locations
         coords = location.coords
+        coordinate = new MM.Location(coords.lat, coords.lon)
         
-        loc = new MM.Location(coords.lat, coords.lon)
-        
-        if extent.containsLocation(loc)
+        if extent.containsLocation(coordinate)
           @swapVideo(location)
           break
     )
+  
+  plotContent: ->
+    
+    for location in Locations
+      if location.video
+        coords = location.coords
+        coordinate = new MM.Location(coords.lat, coords.lon)
+        point = @map.locationPoint(coordinate)
+        name = @dasherize(location.name)
+        marker = $('body').append("<div class='marker' data-name='#{name}' style='left: #{point.x}px; top: #{point.y}px'></div>")
   
   goToLocation: (index, v, rho, map) =>
     
@@ -136,9 +161,13 @@ class Home extends Controller
       previous[0].pause()
       previous.removeClass('show')
     
+    # Offset the location
+    coords = location.coords
+    tmpCoords = {lat: coords.lat - 0.1, lon: coords.lon - 0.2}
+    
     # Ease over to the new location
     easey().map(map)
-      .to(map.locationCoordinate(location.coords))
+      .to(map.locationCoordinate(tmpCoords))
       .zoom(11).optimal(v, rho, =>
         
         # Hide previous video
