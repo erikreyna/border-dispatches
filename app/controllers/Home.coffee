@@ -114,6 +114,8 @@ class Home extends Controller
           @swapVideo(location)
           return
       
+      $('.col2').removeClass('display').removeClass('show')
+      
       # Pause and fade video
       if @currentLocation
         previous = $("video[data-name='#{@dasherize(@currentLocation)}']")
@@ -145,8 +147,6 @@ class Home extends Controller
     v   = v or 0.9
     rho = rho or 1.42
     map = map or @map
-    
-    console.log "You're going to #{location.name}"
     
     # Pause and fade video
     if @currentLocation
@@ -192,6 +192,7 @@ class Home extends Controller
     # Add description and photos
     @description.html(location.description)
     @photos.html require('views/photos')({name: @dasherize(name)})
+    $('.col2').addClass('display').addClass('show')
     
     # Fade in and play current video
     current = $("video[data-name='#{@dasherize(@currentLocation)}']")
