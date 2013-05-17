@@ -85,6 +85,7 @@ video
   transition opacity 1000ms linear
   display none
   opacity 0
+  @outer-deboss(5px)
   
   &.display
     display block
@@ -99,9 +100,8 @@ video
 .social
   position absolute
   bottom 0
-  right 0
+  left 0
   z-index 1
-  width 125px
   
   ul
     list-style-type none
@@ -253,9 +253,12 @@ video
 .photos
   float left
   margin-left 20px
+  left 10%
+  background-color white
+  padding 10px 6px 10px 10px
   
   img
-    width 40%
+    width 49%
     
 .navigate
   border 1px solid #505050
@@ -266,4 +269,3 @@ video
   pointer-events none
   background-color #FAFAFA
   opacity 0.2
-  
