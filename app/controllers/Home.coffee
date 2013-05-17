@@ -20,6 +20,7 @@ class Home extends Controller
     'video'           : 'videos'
     '.photos'         : 'photos'
     '.description'    : 'description'
+    '.navigate'       : 'navigateEl'
   
   
   sourceTemplate: require 'views/primary_video'
@@ -86,12 +87,13 @@ class Home extends Controller
     @map.addCallback('panned', (e) =>
       return unless @map.getZoom() > 10
       
-      position = @targetArea.position()
+      # Get position of navigate div
+      offset = @navigateEl.offset()
       
-      top = position.top
-      left = position.left
-      width = @targetArea.width()
-      height = @targetArea.height()
+      top = offset.top
+      left = offset.left
+      width = @navigateEl.width()
+      height = @navigateEl.height()
       
       # Create new points
       p1 = new MM.Point(top, left)
@@ -100,46 +102,18 @@ class Home extends Controller
       l1 = @map.pointLocation(p1)
       l2 = @map.pointLocation(p2)
       
-      # Cache boundaries
-      minLat = l1.lat
-      maxLat = l2.lat
-      minLon = l1.lon
-      maxLon = l2.lon
+      # Create an extent
+      extent = new MM.Extent(l1, l2)
       
-      # Check if content in region
+      # Check for content in region
       for location in Locations
         coords = location.coords
         
         loc = new MM.Location(coords.lat, coords.lon)
-        if @map.extent().containsLocation(loc)
-          console.log location.name
-          @swapVideo(location)
-          console.log 'swappedvideo'
-          break
         
-        # # Get coordinates of location
-        # 
-        # # Tecate Coordinates
-        # 
-        # # lat:32.5811734
-        # # lon: -116.6209871
-        # 
-        # lat = coords.lat
-        # lon = coords.lon
-        # # console.log 'lon', minLon, maxLon
-        # # console.log 'lat', minLat, maxLat
-        # 
-        # if lat < minLat
-        #   continue
-        # if lat > maxLat
-        #   continue
-        # if lon < minLon
-        #   continue
-        # if lon > maxLon
-        #   continue
-        # 
-        # console.log location
-        # break
+        if extent.containsLocation(loc)
+          @swapVideo(location)
+          break
     )
   
   goToLocation: (index, v, rho, map) =>
