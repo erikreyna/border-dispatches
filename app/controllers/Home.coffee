@@ -9,9 +9,9 @@ class Home extends Controller
   
   # Templates for tile layer (take your pick)
   # template: 'http://tile.openstreetmap.org/{Z}/{X}/{Y}.png'
-  # template: 'http://tile.stamen.com/terrain/{Z}/{X}/{Y}.png'
+  template: 'http://tile.stamen.com/terrain/{Z}/{X}/{Y}.png'
   # template: 'http://tile.stamen.com/watercolor/{Z}/{X}/{Y}.png'
-  template: 'https://tiles.mapbox.com/v3/base.live-land-tr+0.02x0.25;0.00x1.00;0.00x1.00;0.00x1.00,base.mapbox-streets+bg-e8e0d8_scale-1_water-0.00x1.00;0.00x1.00;0.00x1.00;0.00x1.00_streets-0.00x1.00;0.00x1.00;0.00x1.00;0.00x1.00_landuse-0.00x1.00;0.00x1.00;0.00x1.00;0.00x0.00/{Z}/{X}/{Y}.png'
+  # template: 'https://tiles.mapbox.com/v3/base.live-land-tr+0.02x0.25;0.00x1.00;0.00x1.00;0.00x1.00,base.mapbox-streets+bg-e8e0d8_scale-1_water-0.00x1.00;0.00x1.00;0.00x1.00;0.00x1.00_streets-0.00x1.00;0.00x1.00;0.00x1.00;0.00x1.00_landuse-0.00x1.00;0.00x1.00;0.00x1.00;0.00x0.00/{Z}/{X}/{Y}.png'
   
   formats: ['m4v', 'webm']
   
@@ -41,41 +41,21 @@ class Home extends Controller
         
         index = @video[params.id]
         @goToLocation(index)
-    #
-    # Present full screen trailer when page loads
-    #
     
-    # Set up Popcorn instance
-    # @primaryVideo = Popcorn(".primary-video")
-    # 
-    # # Set up Popcorn footnotes
-    # primaryVideo.code({
-    #   start: 32,
-    #   onStart: (e) =>
-    #     
-    #     # Remove initial state of DOM elements
-    #     @background.removeClass('initial')
-    #     @primary.addClass('small')
-    #     @column.addClass('half')
-    #     
-    #     @goToLocation(0)
-    #     
-    #     # TODO: Add marker to map
-    # })
-    # 
-    # primaryVideo.code({
-    #   start: 65,
-    #   onStart: (e) =>
-    #     @goToLocation(1, 0.1)
-    # })
-    # 
-    # primaryVideo.code({
-    #   start: 114,
-    #   onStart: (e) =>
-    #     @goToLocation(2, 0.3)
-    # })
-    # 
-    # primaryVideo.play()
+    # Listen for window resize to update variables
+    $(window).resize (e) =>
+      offset = @navigateEl.offset()
+      
+      top = offset.top
+      left = offset.left
+      width = @navigateEl.width()
+      height = @navigateEl.height()
+      @navigateCorners =
+        p1: left
+        p2: top
+        p3: left + width
+        p4: top + height
+    $(window).resize()
     
     # hide splash page on click
     $('#splash').click =>
@@ -111,17 +91,10 @@ class Home extends Controller
       
       return unless @map.getZoom() > 10
       
-      # Get position of navigate div
-      offset = @navigateEl.offset()
-      
-      top = offset.top
-      left = offset.left
-      width = @navigateEl.width()
-      height = @navigateEl.height()
-      
       # Create new points
-      p1 = new MM.Point(left, top)
-      p2 = new MM.Point(left + width, top + height)
+      navigateCorners = @navigateCorners
+      p1 = new MM.Point(navigateCorners.p1, navigateCorners.p2)
+      p2 = new MM.Point(navigateCorners.p3, navigateCorners.p4)
       
       l1 = @map.pointLocation(p1)
       l2 = @map.pointLocation(p2)
@@ -136,11 +109,15 @@ class Home extends Controller
         if extent.containsLocation(coordinate)
           @swapVideo(location)
           return
-      console.log 'nothing'
       
-      @videos.addClass('hide')
-      @videos.removeClass('show')
+      # Pause and fade video
+      if @currentLocation
+        previous = $("video[data-name='#{@dasherize(@currentLocation)}']")
+        previous[0].pause()
+        previous.removeClass('show')
+      
       @currentLocation = null
+      
     )
   
   plotContent: ->
@@ -181,11 +158,6 @@ class Home extends Controller
     easey().map(map)
       .to(map.locationCoordinate(tmpCoords))
       .zoom(11).optimal(v, rho, =>
-        
-        # Hide previous video
-        @videos.addClass('hide')
-        @videos.removeClass('display')
-        
         @swapVideo(location)
       )
   
@@ -202,7 +174,7 @@ class Home extends Controller
     name = location.name
     return if name is @currentLocation
     
-    @videos.addClass('hide')
+    @hideVideos()
     
     # Set new current location
     @currentLocation = name
@@ -228,5 +200,9 @@ class Home extends Controller
     # setTimeout ( ->
     #   el.addClass('hide')
     # ), 1000
+  
+  hideVideos: ->
+    @videos.addClass('hide')
+    @videos.removeClass('display')
 
 module.exports = Home
