@@ -198,7 +198,6 @@ class Home extends Controller
     
     # Fade in and play current video
     current = $("video[data-name='#{@dasherize(@currentLocation)}']")
-    console.log current
     current.addClass('display')
     setTimeout ( ->
       current.addClass('show')
