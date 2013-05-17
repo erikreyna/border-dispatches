@@ -10,7 +10,7 @@ a
   transition color .2s linear
   text-decoration none
   
-  &:hover
+  &hover
     color red
 
 p
@@ -158,50 +158,6 @@ video
   opacity 0.2
   pointer-events none
 
-.video-box
-  position relative
-  z-index 1
-  width 50%
-  height 50%
-
-  display -webkit-box
-  -webkit-box-orient horizontal
-  -webkit-box-pack start
-  -webkit-box-align start
-
-  display -moz-box
-  -moz-box-orient horizontal
-  -moz-box-pack start
-  -moz-box-align start
-
-  display box
-  box-orient horizontal
-  box-pack start
-  box-align start
-  overflow hidden
-
-  .vbox1
-    padding 30px 3% 0
-    margin-bottom -99999px
-    padding-bottom 99999px
-
-    p
-      margin-bottom 30px
-
-    &nth-child(1)
-      -moz-box-ordinal-group 1
-      -webkit-box-ordinal-group 1
-      box-ordinal-group 1
-
-    &nth-child(2)
-      -moz-box-ordinal-group 2
-      -webkit-box-ordinal-group 2
-      box-ordinal-group 2
-
-    &nth-child(3)
-      -moz-box-ordinal-group 3
-      -webkit-box-ordinal-group 3
-      box-ordinal-group 3
 
 .flexbox
   position relative
@@ -253,27 +209,29 @@ video
       box-ordinal-group 3
     
   .col2
+    transition all 500ms
     width 44%
     height 50%
     padding 10px 3%
     margin-bottom -99999px
     padding-bottom 99919px
-
+    display none
+    opacity 0
+    
+    &.display
+      display block
+      
+    &.show
+      opacity 1
+    
     p
-      margin-bottom 30px
-      background white
-      padding 20px
-      border-radius 7px
-      -moz-border-radius 7px
-      -webkit-border-radius 7px
-      font-size 0.8em
-      -moz-border-radius 7px
-      -webkit-border-radius 7px
-      text-align justify
-      width 97%
-      position relative
-      top -12px
-      height 68%
+      &.description
+        color #000d18
+        font-size 14px
+        font-weight 600
+        text-shadow 0 1px 0 rgba(255,255,255,0.25)
+        text-transform uppercase
+        padding 30px 0
 
 
     &nth-child(1)
@@ -292,7 +250,6 @@ video
       box-ordinal-group 3
 
 .photos
-  background-color white
   padding 10px 8px 10px 10px 
   -moz-border-radius 2px
   -webkit-border-radius 2px
