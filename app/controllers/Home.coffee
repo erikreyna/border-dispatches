@@ -9,8 +9,9 @@ class Home extends Controller
   
   # Templates for tile layer (take your pick)
   # template: 'http://tile.openstreetmap.org/{Z}/{X}/{Y}.png'
-  template: 'http://tile.stamen.com/terrain/{Z}/{X}/{Y}.png'
+  # template: 'http://tile.stamen.com/terrain/{Z}/{X}/{Y}.png'
   # template: 'http://tile.stamen.com/watercolor/{Z}/{X}/{Y}.png'
+  template: 'https://tiles.mapbox.com/v3/base.live-land-tr+0.02x0.25;0.00x1.00;0.00x1.00;0.00x1.00,base.mapbox-streets+bg-e8e0d8_scale-1_water-0.00x1.00;0.00x1.00;0.00x1.00;0.00x1.00_streets-0.00x1.00;0.00x1.00;0.00x1.00;0.00x1.00_landuse-0.00x1.00;0.00x1.00;0.00x1.00;0.00x0.00/{Z}/{X}/{Y}.png'
   
   formats: ['m4v', 'webm']
   
