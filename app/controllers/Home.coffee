@@ -25,6 +25,9 @@ class Home extends Controller
     '.header'         : 'header'
   
   
+  events:
+    'click ul li a'   : 'highlightName'
+  
   sourceTemplate: require 'views/primary_video'
   
   video:
@@ -61,6 +64,7 @@ class Home extends Controller
     # hide splash page on click
     $('#splash').click =>
       @fade( $('#splash') )
+      $('ul li a').first().click()
       @navigate '/video/ali-jegk'
       $('.flexbox').removeClass('hide')
     
@@ -169,6 +173,12 @@ class Home extends Controller
     for format in @formats
       sources.push "#{name}.#{format}"
     return sources
+  
+  highlightName: (e) =>
+    $('ul li a').removeClass('highlight')
+    
+    el = $(e.target)
+    el.addClass('highlight')
   
   swapVideo: (location) =>
     return unless location.video

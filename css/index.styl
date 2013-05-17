@@ -20,6 +20,19 @@ img.logo
   height 20px
   padding-right 6px
 
+.hide
+  display none
+
+.fade
+  transition all 500ms
+  opacity 0
+
+.display
+  display block
+  
+.show
+  opacity 1
+  
 #splash  
   position fixed
   top 0
@@ -86,6 +99,12 @@ body
       &first-child
         padding-left 20px
         border-left 0px
+        
+      a
+        text-decoration none
+        
+        &.highlight
+          color red
 
 .clearfix 
   display inline-block
@@ -103,12 +122,6 @@ video
   opacity 0
   @outer-deboss(5px)
   pointer-events all
-  
-  &.display
-    display block
-  
-  &.show
-    opacity 1
   
   &.small
     z-index 2
