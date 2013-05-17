@@ -21,6 +21,7 @@ class Home extends Controller
     '.photos'         : 'photos'
     '.description'    : 'description'
     '.navigate'       : 'navigateEl'
+    '.header'         : 'header'
   
   
   sourceTemplate: require 'views/primary_video'
@@ -201,6 +202,7 @@ class Home extends Controller
     # Add description
     @description.html(location.description)
     @photos.html require('views/photos')({name: @dasherize(name)})
+    @header.html(location.header)
     
     # Fade in and play current video
     current = $("video[data-name='#{@dasherize(@currentLocation)}']")

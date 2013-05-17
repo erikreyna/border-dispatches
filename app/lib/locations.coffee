@@ -6,6 +6,7 @@ module.exports =
       lat: 31.816022
       lon: -112.554245
     video: true
+    header: 'The Reservation'
     description: "The Tohono O’odham Nation is the second largest Native American reservation in the United States. It is roughly the size of Connecticut and shares 74 miles of the U.S.-Mexico border."
   ,
     name: 'Nogales'
@@ -13,6 +14,7 @@ module.exports =
       lat: 31.329812
       lon: -110.964274
     video: true
+    header: 'The Kitchen'
     description: "With a population of over 220,000, Nogales, Sonora is one of the largest border towns in Mexico, and has a $20 billion trade industry. Many of the undocumented migrants, detained along the border, are deported here."
     
   ,
@@ -21,6 +23,7 @@ module.exports =
       lat: 31.335091
       lon: -110.181112
     video: true
+    header: 'The Veteran'
     description: "Bill Odle lives a few hundred  yards from the wall that divides Arizona from Sonora, Mexico. In the six years he’s lived there, Bill has seen men, women and children pass through from all over the world."
   # ,
   #   name: 'San Ysidro San Diego California'
