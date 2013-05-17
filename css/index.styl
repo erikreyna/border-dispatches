@@ -17,6 +17,7 @@ p
 
 img.logo
   height 20px
+  padding-right 6px
 
 
 body
@@ -80,11 +81,6 @@ body
     clear both
     visibility hidden
 
-.primary-video
-
-  &.deboss
-    outer-deboss(5px)
-
 video
   transition opacity 1000ms linear
   display none
@@ -116,14 +112,18 @@ video
       img
       width 20px
 
-#map
+#map, #background
   position absolute
   top 0
   left 0
   right 0
   bottom 0
   z-index 0
-  
+
+#background
+  background-color #505050
+  opacity 0.2
+  pointer-events none
 
 .video-box
   position relative
@@ -173,6 +173,8 @@ video
 .flexbox
   position relative
   z-index 1
+  pointer-events none
+  
   
   display -webkit-box
   -webkit-box-orient horizontal
@@ -228,6 +230,10 @@ video
 
     p
       margin-bottom 30px
+      background white
+      padding 20px
+      border-radius 7px
+      font-size 0.8em
 
     &:nth-child(1)
       -moz-box-ordinal-group 1
@@ -250,3 +256,14 @@ video
   
   img
     width 40%
+    
+.navigate
+  border 1px solid #505050
+  border-radius 10px
+  box-sizing border-box
+  box-shadow inset 2px 2px 4px #505050, inset -2px -2px 4px #505050
+  height 80%
+  pointer-events none
+  background-color #FAFAFA
+  opacity 0.2
+  

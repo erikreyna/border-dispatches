@@ -141,7 +141,7 @@ class Home extends Controller
         # console.log location
         # break
     )
-    
+  
   goToLocation: (index, v, rho, map) =>
     
     # Select from Locations array
